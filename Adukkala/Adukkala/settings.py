@@ -17,7 +17,7 @@ SECRET_KEY = config('SECRET_KEY')
 DEBUG = config('DEBUG', cast=bool, default=True)
 
 # Allow all hosts from environment or default
-ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='localhost,127.0.0.1,adukkala.onrender.com').split(',')
+ALLOWED_HOSTS = [config("HOST_URL")]
 
 # Application definition
 INSTALLED_APPS = [
