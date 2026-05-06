@@ -6,7 +6,7 @@
   {% csrf_token %}
 
   <input name="name" class="form-control mb-2"
-         placeholder="Item name" value="{{ item.name|default:'' }}" required>
+         placeholder="ഐറ്റം നാം / Item name" value="{{ item.name|default:'' }}" required spellcheck="true">
 
   <input name="price" type="number" class="form-control mb-2"
          placeholder="Price" value="{{ item.price|default:'' }}" required>
