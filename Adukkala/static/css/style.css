@@ -1,0 +1,378 @@
+/* BASE STYLES */
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #f8f9fa;
+}
+
+/* SIDEBAR STYLES */
+.nav-link {
+  border-radius: 6px;
+  padding: 8px 12px;
+  transition: background-color 0.2s;
+}
+
+.nav-link:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+/* ==================== MODERN DASHBOARD ITEM CARDS ==================== */
+.dashboard-item-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 15px;
+}
+
+@media (max-width: 768px) {
+  .dashboard-item-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .dashboard-item-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Item Card Color Variations */
+.item-card-compact:nth-child(1) {
+  background: linear-gradient(135deg, #FF6B35 0%, #FF8555 100%);
+  border: none !important;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.item-card-compact:nth-child(2) {
+  background: linear-gradient(135deg, #A0522D 0%, #C17745 100%);
+  border: none !important;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.item-card-compact:nth-child(3) {
+  background: linear-gradient(135deg, #DAA520 0%, #FFB900 100%);
+  border: none !important;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.item-card-compact:nth-child(4) {
+  background: linear-gradient(135deg, #9932CC 0%, #BA55D3 100%);
+  border: none !important;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.item-card-compact:nth-child(5) {
+  background: linear-gradient(135deg, #28A745 0%, #34CE57 100%);
+  border: none !important;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.item-card-compact:nth-child(n+6) {
+  background: linear-gradient(135deg, #FF6B35 0%, #FF8555 100%);
+  border: none !important;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.item-card-compact:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.item-card-compact .dashboard-item-img {
+  width: 100% !important;
+  height: 160px !important;
+  object-fit: contain;
+  object-position: center;
+  border-radius: 12px;
+  display: block;
+  background-color: #f0f0f0;
+}
+
+.item-card-compact .dashboard-item-img.placeholder {
+  background: rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 40px;
+  border-radius: 12px;
+}
+
+.item-card-compact .dashboard-item-img.placeholder::after {
+  display: none;
+}
+
+.item-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.3) 60%, transparent 100%);
+  padding: 12px;
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  min-height: 60px;
+}
+
+.item-card-compact .item-card-name {
+  font-size: 16px;
+  font-weight: 700;
+  color: white;
+  text-overflow: ellipsis;
+  line-height: 1.3;
+}
+
+.item-card-compact .item-card-price {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 600;
+  margin-top: 2px;
+}
+
+.item-card-compact .qty-controls {
+  display: none;
+}
+
+/* ==================== MODERN BILL DISPLAY ==================== */
+.bill {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.bill .list-group-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  background: #f9f9f9;
+  border: 1px solid #f0f0f0;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.bill .list-group-item:last-child {
+  margin-bottom: 0;
+}
+
+.bill .btn-group-sm .btn {
+  padding: 0.25rem 0.5rem;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.bill .btn-outline-secondary {
+  color: #666;
+  border-color: #ddd;
+  background: white;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.bill .btn-outline-secondary:hover {
+  background: #f0f0f0;
+  border-color: #999;
+  color: #333;
+}
+
+.bill .btn-light {
+  background: #f0f0f0;
+  border: 1px solid #ddd;
+  cursor: not-allowed;
+}
+
+/* ==================== TOTAL BOX ==================== */
+.bill-section {
+  margin-top: 20px;
+}
+
+/* Target the total section and style it */
+.bill-section h5 {
+  background: linear-gradient(135deg, #28A745 0%, #20c997 100%);
+  color: white;
+  padding: 20px;
+  border-radius: 12px;
+  text-align: center;
+  font-size: 18px;
+  font-weight: 700;
+  margin: 15px 0;
+  box-shadow: 0 4px 12px rgba(40, 167, 69, 0.2);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.bill-section h5 span {
+  font-size: 28px;
+}
+
+/* ==================== SAVE BILL BUTTON ==================== */
+.bill-section .btn-primary {
+  background: linear-gradient(135deg, #007BFF 0%, #0056b3 100%);
+  border: none;
+  padding: 16px 20px;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 700;
+  width: 100%;
+  box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
+  transition: all 0.3s ease;
+  margin-top: 10px;
+}
+
+.bill-section .btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 123, 255, 0.4);
+}
+
+/* ==================== PAYMENT CALCULATOR ==================== */
+.bill-section .border {
+  border-radius: 12px !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+/* ==================== DASHBOARD ITEM CARDS (ALTERNATE STYLES) ==================== */
+.dashboard-item-img {
+  width: 100% !important;
+  height: 80px !important;
+  object-fit: cover;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  display: block;
+  margin: 0 !important;
+}
+
+.dashboard-item-img.placeholder {
+  background-color: #e9ecef;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dashboard-item-img.placeholder::after {
+  content: "No Image";
+  font-size: 11px;
+  color: #adb5bd;
+}
+
+.item-card-compact {
+  width: 100%;
+}
+
+.item-card-name {
+  font-size: 14px;
+  font-weight: 800;
+  display: block;
+  color: #000;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-top: 5px;
+}
+
+.item-card-price {
+  font-size: 13px;
+  color: #666;
+  font-weight: 600;
+}
+
+.btn-qty {
+  width: 30px;
+  height: 28px;
+  font-size: 18px;
+  border: 1px solid #ddd;
+  background: white;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-qty:hover {
+  background: #f0f0f0;
+  border-color: #999;
+}
+
+.qty-val {
+  font-size: 15px;
+  font-weight: 700;
+  min-width: 25px;
+  text-align: center;
+}
+
+@media (max-width: 480px) {
+  .dashboard-item-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .dashboard-item-img {
+    height: 80px !important;
+  }
+}
+
+/* ==================== GRID ITEM CARD (FOR ITEMS PAGE) ==================== */
+.item-grid-card {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 0 0 15px 0;
+  border: 1px solid #e5e5e5;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+  transition: all 0.2s ease;
+  text-align: center;
+  overflow: hidden;
+}
+
+.item-grid-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08);
+}
+
+.item-img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  display: block;
+}
+
+.item-img.placeholder {
+  background-color: #e9ecef;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.item-img.placeholder::after {
+  content: "No Image";
+  color: #adb5bd;
+}
+
+.item-grid-name {
+  font-size: 18px;
+  font-weight: 700;
+  margin-top: 10px;
+  padding: 0 10px;
+}
+
+.item-grid-price {
+  font-size: 16px;
+  color: #555;
+  padding: 0 10px;
+}
+
+.item-grid-card .d-flex {
+  padding: 0 10px;
+}

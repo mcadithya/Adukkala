@@ -1,0 +1,64 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>{% block title %}Hotel Billing{% endblock %}</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+  <!-- Custom CSS -->
+  <link href="{% static 'css/style.css' %}" rel="stylesheet">
+</head>
+
+<body>
+
+  <div class="d-flex flex-column min-vh-100">
+
+    <!-- MOBILE HEADER (Visible only on small screens) -->
+    <nav class="navbar navbar-dark bg-dark d-md-none px-3">
+      <span class="navbar-brand mb-0 h1">Adukkala</span>
+      <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebarOffcanvas">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </nav>
+
+    <div class="d-flex flex-grow-1">
+
+      <!-- SIDEBAR (Desktop: Fixed, Mobile: Offcanvas) -->
+      <div class="bg-dark text-white p-3 d-none d-md-block" style="width:220px; min-height:100vh;">
+        <h5 class="mb-4">Admin Panel</h5>
+        <hr class="text-white-50">
+        {% include 'sidebar_links.html' %}
+      </div>
+
+      <!-- OFFCANVAS SIDEBAR (Mobile only) -->
+      <div class="offcanvas offcanvas-start bg-dark text-white" tabindex="-1" id="sidebarOffcanvas"
+        style="width: 250px;">
+        <div class="offcanvas-header border-bottom border-secondary">
+          <h5 class="offcanvas-title">Menu</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"></button>
+        </div>
+        <div class="offcanvas-body p-3">
+          {% include 'sidebar_links.html' %}
+        </div>
+      </div>
+
+      <!-- MAIN CONTENT -->
+      <div class="flex-grow-1 p-3 p-md-4 bg-light min-vh-100">
+        {% block content %}{% endblock %}
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+
+
+</body>
+
+</html>

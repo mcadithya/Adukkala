@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <h4>Report</h4>
+  <div class="btn-group">
+    <a href="?filter=today"
+      class="btn btn-sm btn-outline-dark {% if filter_type == 'today' %}active{% endif %}">Today</a>
+    <a href="?filter=weekly"
+      class="btn btn-sm btn-outline-dark {% if filter_type == 'weekly' %}active{% endif %}">Weekly</a>
+    <a href="?filter=monthly"
+      class="btn btn-sm btn-outline-dark {% if filter_type == 'monthly' %}active{% endif %}">Monthly</a>
+    <a href="?filter=all"
+      class="btn btn-sm btn-outline-dark {% if filter_type == 'all' or not filter_type %}active{% endif %}">All</a>
+  </div>
+</div>
+
+<div class="row mb-4">
+  <div class="col-md-4 text-center">
+    <div class="card p-3 bg-white border h-100">
+      <h6 class="text-muted small mb-1">Product Sale Amount</h6>
+      <h4 class="mb-0">₹{{ totals.total_sales|default:0 }}</h4>
+    </div>
+  </div>
+  <div class="col-md-4 text-center">
+    <div class="card p-3 bg-white border h-100">
+      <h6 class="text-muted small mb-1">Unpaid Amount</h6>
+      <h4 class="mb-0 text-danger">₹{{ totals.total_balance|default:0 }}</h4>
+    </div>
+  </div>
+  <div class="col-md-4 text-center">
+    <div class="card p-3 bg-white border h-100">
+      <h6 class="text-muted small mb-1">Net Sales Amount</h6>
+      <h4 class="mb-0 text-success">₹{{ totals.net_amount|default:0 }}</h4>
+    </div>
+  </div>
+</div>
+
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Total</th>
+      <th>Given</th>
+      <th>Balance</th>
+      <th>Date</th>
+      <th>Status</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    {% for order in orders %}
+    <tr>
+      <td>{{ order.id }}</td>
+      <td>₹{{ order.total_amount }}</td>
+      <td>₹{{ order.customer_given }}</td>
+      <td>
+        {% if not order.is_paid and order.balance > 0 %}
+        ₹{{ order.balance }}
+        {% else %}
+        -
+        {% endif %}
+      </td>
+      <td>{{ order.created_at|date:"d-m-Y H:i" }}</td>
+      <td>
+        {% if order.is_paid %}
+        <span class="badge bg-success">Paid</span>
+        {% else %}
+        <span class="badge bg-danger">Unpaid</span>
+        {% endif %}
+      </td>
+      <td>
+        <a href="{% url 'report_detail' order.id %}" class="btn btn-sm btn-primary">
+          View
+        </a>
+      </td>
+    </tr>
+    {% empty %}
+    <tr>
+      <td colspan="7" class="text-center">No bills yet</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% endblock %}

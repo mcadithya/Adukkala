@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="row justify-content-center">
+    <div class="col-md-5">
+        <div class="card shadow-sm border-0">
+            <div class="card-body p-4">
+                <h4 class="mb-4">Add New User</h4>
+
+                {% if error %}
+                <div class="alert alert-danger py-2 small mb-3">
+                    {{ error }}
+                </div>
+                {% endif %}
+
+                <form method="POST">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label class="form-label fw-bold small">Username</label>
+                        <input type="text" name="username" class="form-control" placeholder="Enter username" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label fw-bold small">Password</label>
+                        <input type="password" name="password" class="form-control" placeholder="Enter password"
+                            required>
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="form-label fw-bold small">User Role</label>
+                        <select name="role" class="form-select" required>
+                            <option value="staff">Staff (Can't see Expenses)</option>
+                            <option value="admin">Admin (Full Access / See Expenses)</option>
+                        </select>
+                        <div class="form-text mt-2 small">
+                            Staff members can manage bills and customers but won't have access to financial cost data.
+                        </div>
+                    </div>
+
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-primary">Create User Account</button>
+                        <a href="{% url 'user_list' %}" class="btn btn-light text-muted">Cancel</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

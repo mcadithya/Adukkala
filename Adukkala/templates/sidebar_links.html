@@ -1,0 +1,44 @@
+<ul class="nav flex-column gap-1">
+    <li class="nav-item">
+        <a class="nav-link text-white" href="{% url 'dashboard' %}">
+            Dashboard
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link text-white" href="{% url 'report' %}">
+            Report
+        </a>
+    </li>
+
+
+
+    <li class="nav-item">
+        <a class="nav-link text-white" href="{% url 'customers_list' %}">
+            Customers
+        </a>
+    </li>
+
+    {% if user.is_superuser %}
+    <li class="nav-item border-top border-secondary mt-2 pt-2">
+        <a class="nav-link text-white-50 small mb-1 disabled py-0">Admin Tools</a>
+        <a class="nav-link text-white" href="{% url 'items' %}">
+            Items
+        </a>
+        <a class="nav-link text-white" href="{% url 'expense_list' %}">
+            Expenses
+        </a>
+        <a class="nav-link text-white" href="{% url 'user_list' %}">
+            Users
+        </a>
+    </li>
+    {% endif %}
+
+    <li class="nav-item mt-auto pt-4">
+        <hr class="text-white-50">
+        <div class="px-3 mb-2 text-white-50 small">User: <strong>{{ user.username }}</strong></div>
+        <a class="nav-link text-danger fw-bold" href="{% url 'logout' %}">
+            Logout
+        </a>
+    </li>
+</ul>

@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h4>Update Payment for Order #{{ order.id }}</h4>
+<p><strong>Customer:</strong> {{ order.customer.name|default:"Walk-in Customer" }}</p>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="card p-4">
+            <h5>Order Details</h5>
+            <table class="table table-borderless">
+                <tr>
+                    <td>Total Amount:</td>
+                    <td>₹{{ order.total_amount }}</td>
+                </tr>
+                <tr>
+                    <td>Already Paid:</td>
+                    <td>₹{{ order.customer_given }}</td>
+                </tr>
+                <tr class="table-danger">
+                    <td><strong>Remaining Balance:</strong></td>
+                    <td><strong>₹{{ order.balance }}</strong></td>
+                </tr>
+            </table>
+
+            <hr>
+
+            <form method="POST">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label class="form-label">Add New Payment Amount (₹):</label>
+                    <input type="number" name="payment" class="form-control" placeholder="Enter amount received" min="0"
+                        max="{{ order.balance }}">
+                </div>
+
+                <div class="d-grid gap-2">
+                    <button type="submit" name="action" value="partial_payment" class="btn btn-primary">
+                        Add Payment
+                    </button>
+                    <button type="submit" name="action" value="full_payment" class="btn btn-success">
+                        Complete Full Payment
+                    </button>
+                    {% if order.customer %}
+                    <a href="{% url 'customer_bills' order.customer_id %}" class="btn btn-secondary">Cancel</a>
+                    {% else %}
+                    <a href="{% url 'report' %}" class="btn btn-secondary">Cancel</a>
+                    {% endif %}
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

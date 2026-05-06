@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <h4>Items</h4>
+  <a href="{% url 'item_add' %}" class="btn btn-dark">
+    + Add Item
+  </a>
+</div>
+
+<div class="row g-4">
+  {% for item in items %}
+  <div class="col-md-3">
+    <div class="item-grid-card text-center">
+
+      {% if item.image %}
+        <img src="{{ item.image.url }}" class="item-img mb-2" alt="{{ item.name }}">
+      {% else %}
+        <div class="item-img placeholder"></div>
+      {% endif %}
+
+      <div class="item-grid-name mt-2">
+        {{ item.name }}
+      </div>
+
+      <div class="item-grid-price">
+        ₹{{ item.price }}
+      </div>
+
+      <div class="d-flex gap-2 mt-3">
+        <a href="{% url 'item_edit' item.id %}"
+           class="btn btn-outline-dark w-50">
+          Edit
+        </a>
+
+        <a href="{% url 'item_delete' item.id %}"
+           class="btn btn-outline-danger w-50">
+          Delete
+        </a>
+      </div>
+
+    </div>
+  </div>
+  {% empty %}
+  <div class="col-12 text-center text-muted">
+    No items added
+  </div>
+  {% endfor %}
+</div>
+
+{% endblock %}

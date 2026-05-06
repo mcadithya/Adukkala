@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h4>Bill Details</h4>
+
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Item</th>
+      <th>Price</th>
+      <th>Qty</th>
+      <th>Total</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for item in bill_items %}
+    <tr>
+      <td>{{ item.name }}</td>
+      <td>₹{{ item.price }}</td>
+      <td>{{ item.qty }}</td>
+      <td>₹{{ item.total }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<hr>
+
+<p><strong>Grand Total:</strong> ₹{{ order.total_amount }}</p>
+<p><strong>Given:</strong> ₹{{ order.customer_given }}</p>
+<p><strong>Balance:</strong> ₹{{ order.balance }}</p>
+
+<a href="{% url 'report' %}" class="btn btn-secondary">
+  Back to Report
+</a>
+
+{% endblock %}

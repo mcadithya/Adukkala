@@ -1,0 +1,26 @@
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path("", views.dashboard, name="dashboard"),
+    path("items/", views.items_list, name="items"),
+    path("items/add/", views.item_add, name="item_add"),
+    path("items/<int:pk>/edit/", views.item_edit, name="item_edit"),
+    path("items/<int:pk>/delete/", views.item_delete, name="item_delete"),
+    path("report/", views.report, name="report"),
+    path("report/<int:order_id>/", views.report_detail, name="report_detail"),
+    path("report/<int:order_id>/edit/", views.order_edit, name="order_edit"),
+    path("unpaid-bills/", views.unpaid_bills, name="unpaid_bills"),
+    path("customers/create/", views.customer_create, name="customer_create"),
+    path("customers/", views.customers_list, name="customers_list"),
+    path("customers/<int:customer_id>/edit/", views.customer_edit, name="customer_edit"),
+    path("customers/<int:customer_id>/bills/", views.customer_bills, name="customer_bills"),
+    path("customers/<int:customer_id>/pay-all/", views.customer_pay_all, name="customer_pay_all"),
+    path("expenses/", views.expense_list, name="expense_list"),
+    path("expenses/add/", views.expense_add, name="expense_add"),
+    path("login/", views.user_login, name="login"),
+    path("logout/", views.user_logout, name="logout"),
+    path("users/", views.user_list, name="user_list"),
+    path("users/add/", views.user_add, name="user_add"),
+    path("users/<int:user_id>/reset-password/", views.user_password_reset, name="user_password_reset"),
+]
