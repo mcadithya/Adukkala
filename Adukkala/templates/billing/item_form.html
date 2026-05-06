@@ -5,8 +5,18 @@
 <form method="post" enctype="multipart/form-data" class="mt-3">
   {% csrf_token %}
 
-  <input name="name" class="form-control mb-2"
-         placeholder="ഐറ്റം നാം / Item name" value="{{ item.name|default:'' }}" required spellcheck="true">
+  <div class="mb-3">
+    <label class="form-label">ഐറ്റം നാം *</label>
+    <div style="position: relative;">
+      <input id="itemNameInput" name="name" class="form-control"
+             placeholder="Malayalam item name (e.g., ചായ, കാപ്പി, അരി)" 
+             value="{{ item.name|default:'' }}" required autocomplete="off" spellcheck="true">
+      <div id="suggestionsList" class="list-group position-absolute w-100" 
+           style="top: 100%; left: 0; max-height: 200px; overflow-y: auto; display: none; z-index: 1000;">
+      </div>
+    </div>
+    <small class="text-muted d-block mt-2">💡 Type English (e.g., tea, coffee) to see Malayalam suggestions</small>
+  </div>
 
   <input name="price" type="number" class="form-control mb-2"
          placeholder="Price" value="{{ item.price|default:'' }}" required>
@@ -16,4 +26,109 @@
   <button class="btn btn-dark">Save</button>
   <a href="{% url 'items' %}" class="btn btn-secondary">Cancel</a>
 </form>
+
+<script>
+// English to Malayalam Translation Dictionary
+const translations = {
+  'tea': 'ചായ',
+  'coffee': 'കാപ്പി',
+  'rice': 'അരി',
+  'bread': 'റൊട്ടി',
+  'milk': 'പാൽ',
+  'water': 'വെള്ളം',
+  'juice': 'ജ്യൂസ്',
+  'buttermilk': 'മോര്',
+  'yogurt': 'തൈരി',
+  'ghee': 'നെയ്യ്',
+  'oil': 'എണ്ണ',
+  'salt': 'ഉപ്പ്',
+  'sugar': 'പഞ്ചസാര',
+  'spice': 'സുഗന്ധദ്രവ്യം',
+  'curry': 'കറി',
+  'chicken': 'കോഴി',
+  'fish': 'മത്സ്യം',
+  'meat': 'മാംസം',
+  'egg': 'മുട്ട',
+  'lentil': 'പയർ',
+  'chickpea': 'കടല',
+  'beans': 'അവിയൽ',
+  'vegetable': 'പച്ചക്കറി',
+  'fruit': 'പഴം',
+  'banana': 'വാഴ',
+  'apple': 'ആപ്പിൾ',
+  'mango': 'മാങ്ങ',
+  'orange': 'ഓറഞ്ച്',
+  'grape': 'മുന്തിരി',
+  'papaya': 'പപ്പായ',
+  'pineapple': 'കൈതച്ചക്ക',
+  'coconut': 'തെങ്ങ്',
+  'lime': 'നാരങ്ങ',
+  'lemon': 'ലെമൻ',
+  'ginger': 'ഇഞ്ചി',
+  'garlic': 'വെളളുളി',
+  'onion': 'ഉള്ളി',
+  'potato': 'ഉരുളക്കിഴങ്ങ്',
+  'tomato': 'തക്കാളി',
+  'carrot': 'കാരറ്റ്',
+  'cabbage': 'കാബേജ്',
+  'spinach': 'പാലക്',
+  'soup': 'സൂപ്പ്',
+  'stew': 'സ്റ്റ്യു',
+  'samosa': 'സമോസ',
+  'dal': 'ദാൽ',
+  'noodles': 'നൂഡിൽസ്',
+  'pasta': 'പാസ്റ്റ',
+  'dessert': 'മിഠായി',
+  'cake': 'കേക്ക്',
+  'cookie': 'കുക്കി',
+  'donut': 'ഡോനട്ട്',
+  'chocolate': 'ചോക്ലേറ്റ്',
+  'ice cream': 'ഐസ്ക്രീം'
+};
+
+const itemNameInput = document.getElementById('itemNameInput');
+const suggestionsList = document.getElementById('suggestionsList');
+
+itemNameInput.addEventListener('input', function() {
+  const input = this.value.toLowerCase().trim();
+  
+  if (input.length < 1) {
+    suggestionsList.style.display = 'none';
+    return;
+  }
+
+  // Find matching translations
+  const matches = Object.entries(translations).filter(([eng, mal]) => 
+    eng.toLowerCase().includes(input)
+  );
+
+  if (matches.length > 0) {
+    suggestionsList.innerHTML = matches.map(([eng, mal]) => `
+      <button type="button" class="list-group-item list-group-item-action" 
+              onclick="selectTranslation('${mal}', event)"
+              style="text-align: left; padding: 10px;">
+        <div><strong>${mal}</strong></div>
+        <small class="text-muted">${eng.charAt(0).toUpperCase() + eng.slice(1)}</small>
+      </button>
+    `).join('');
+    suggestionsList.style.display = 'block';
+  } else {
+    suggestionsList.style.display = 'none';
+  }
+});
+
+function selectTranslation(malayalamText, event) {
+  event.preventDefault();
+  itemNameInput.value = malayalamText;
+  suggestionsList.style.display = 'none';
+  itemNameInput.focus();
+}
+
+// Hide suggestions when clicking outside
+document.addEventListener('click', function(event) {
+  if (!event.target.closest('#itemNameInput') && !event.target.closest('#suggestionsList')) {
+    suggestionsList.style.display = 'none';
+  }
+});
+</script>
 {% endblock %}
