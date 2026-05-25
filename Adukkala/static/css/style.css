@@ -376,3 +376,88 @@ body {
 .item-grid-card .d-flex {
   padding: 0 10px;
 }
+.dashboard-item-grid-wrapper {
+    height: 50vh;
+    overflow-y: auto;
+    padding-right: 5px;
+}
+
+.dashboard-item-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+}
+
+/* Tablet */
+@media (max-width: 992px) {
+    .dashboard-item-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* Mobile POS Layout */
+@media (max-width: 768px) {
+
+    .dashboard-item-grid-wrapper {
+        height: 45vh;
+        overflow-y: auto;
+    }
+
+    .dashboard-item-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+
+    .row {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .col-md-6 {
+        width: 100%;
+    }
+}
+@media (max-width: 768px) {
+
+    body {
+        overflow: hidden;
+    }
+
+    /* ITEMS TOP */
+
+    .items-section {
+        height: 50vh;
+        overflow-y: auto;
+        margin-bottom: 10px !important;
+    }
+
+    .dashboard-item-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+
+    /* BILL FIXED BOTTOM */
+
+    .bill-section {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 50vh;
+        background: white;
+        z-index: 1000;
+        overflow-y: auto;
+        border-top: 2px solid #ddd;
+        padding-bottom: 80px;
+    }
+
+    .calculator-section {
+        margin-bottom: 50vh;
+    }
+
+    .dashboard-item-img {
+        height: 110px;
+        object-fit: cover;
+    }
+}
