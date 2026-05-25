@@ -2,7 +2,30 @@
 {% block content %}
 
 <h4>Add New Expense</h4>
+<div class="border p-2 mb-3">
+    <h6>Expense Items</h6>
 
+    <div class="row g-2">
+
+        {% for expense_item in expense_items %}
+        <div class="col-md-3">
+            <div class="card p-3 text-center"
+                 style="cursor:pointer;"
+                 onclick="selectExpense('{{ expense_item.name }}')">
+
+                <strong>{{ expense_item.name }}</strong>
+
+                {% if expense_item.category %}
+                <small class="text-muted">
+                    {{ expense_item.category }}
+                </small>
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+
+    </div>
+</div>
 <div class="row">
     <div class="col-md-6">
         <div class="card p-4">
@@ -27,5 +50,9 @@
         </div>
     </div>
 </div>
-
+<script>
+function selectExpense(name) {
+    document.querySelector('input[name="description"]').value = name;
+}
+</script>
 {% endblock %}

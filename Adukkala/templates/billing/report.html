@@ -45,7 +45,9 @@
       <th>Balance</th>
       <th>Date</th>
       <th>Status</th>
+      <th>Payment</th>
       <th>Action</th>
+      
     </tr>
   </thead>
 
@@ -70,6 +72,13 @@
         <span class="badge bg-danger">Unpaid</span>
         {% endif %}
       </td>
+<td>
+  {% if order.is_paid %}
+    {{ order.payment_method }}
+  {% else %}
+    -
+  {% endif %}
+</td>
       <td>
         <a href="{% url 'report_detail' order.id %}" class="btn btn-sm btn-primary">
           View
@@ -82,6 +91,7 @@
     </tr>
     {% endfor %}
   </tbody>
+ 
 </table>
 
 {% endblock %}

@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import JsonResponse
-from .models import Item, Order, OrderItem, Customer, Expense
+from .models import Item, Order, OrderItem, Customer, Expense, ExpenseItem
 import json
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.decorators.csrf import csrf_exempt
@@ -72,12 +72,13 @@ def dashboard(request):
             customer = Customer.objects.get(id=customer_id)
 
         order = Order.objects.create(
-            customer=customer,
-            total_amount=data["total"],
-            customer_given=data["given"],
-            balance=data["balance"],
-            is_paid=is_paid
-        )
+        customer=customer,
+        total_amount=data["total"],
+        customer_given=data["given"],
+        balance=data["balance"],
+        is_paid=is_paid,
+        payment_method=data.get("payment_method", "Google Pay")
+    )
 
         for i in data["items"]:
             OrderItem.objects.create(
@@ -397,7 +398,52 @@ def expense_add(request):
             amount=request.POST.get("amount")
         )
         return redirect("expense_list")
-    return render(request, "billing/expense_form.html")
+
+    expense_items = ExpenseItem.objects.all()
+
+    return render(request, "billing/expense_form.html", {
+        "expense_items": expense_items
+    })
+
+@login_required
+@user_passes_test(is_admin)
+def expense_items_list(request):
+    expense_items = ExpenseItem.objects.all()
+    return render(request, "billing/expense_items_list.html", {"expense_items": expense_items})
+
+
+@login_required
+@user_passes_test(is_admin)
+def expense_item_add(request):
+    if request.method == "POST":
+        ExpenseItem.objects.create(
+            name=request.POST.get("name"),
+            category=request.POST.get("category")
+        )
+        return redirect("expense_items")
+    return render(request, "billing/expense_item_form.html")
+
+
+@login_required
+@user_passes_test(is_admin)
+def expense_item_edit(request, pk):
+    expense_item = get_object_or_404(ExpenseItem, pk=pk)
+    if request.method == "POST":
+        expense_item.name = request.POST.get("name")
+        expense_item.category = request.POST.get("category")
+        expense_item.save()
+        return redirect("expense_items")
+    return render(request, "billing/expense_item_form.html", {"expense_item": expense_item})
+
+
+@login_required
+@user_passes_test(is_admin)
+def expense_item_delete(request, pk):
+    expense_item = get_object_or_404(ExpenseItem, pk=pk)
+    if request.method == "POST":
+        expense_item.delete()
+        return redirect("expense_items")
+    return render(request, "billing/expense_item_delete.html", {"expense_item": expense_item})
 
 from django.contrib.auth.models import User
 
@@ -438,3 +484,5 @@ def user_password_reset(request, user_id):
             user_to_reset.save()
             return redirect("user_list")
     return render(request, "billing/user_password_reset.html", {"user_to_reset": user_to_reset})
+
+

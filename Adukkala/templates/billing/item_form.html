@@ -6,7 +6,7 @@
   {% csrf_token %}
 
   <div class="mb-3">
-    <label class="form-label">ഐറ്റം നാം *</label>
+    <label class="form-label">Item Name *</label>
     <div style="position: relative;">
       <input id="itemNameInput" name="name" class="form-control"
              placeholder="Malayalam item name (e.g., ചായ, കാപ്പി, അരി)" 
@@ -15,7 +15,6 @@
            style="top: 100%; left: 0; max-height: 200px; overflow-y: auto; display: none; z-index: 1000;">
       </div>
     </div>
-    <small class="text-muted d-block mt-2">💡 Type English (e.g., tea, coffee) to see Malayalam suggestions</small>
   </div>
 
   <input name="price" type="number" class="form-control mb-2"
@@ -72,7 +71,6 @@ const translations = {
   'carrot': 'കാരറ്റ്',
   'cabbage': 'കാബേജ്',
   'spinach': 'പാലക്',
-  'soup': 'സൂപ്പ്',
   'stew': 'സ്റ്റ്യു',
   'samosa': 'സമോസ',
   'dal': 'ദാൽ',
@@ -83,7 +81,46 @@ const translations = {
   'cookie': 'കുക്കി',
   'donut': 'ഡോനട്ട്',
   'chocolate': 'ചോക്ലേറ്റ്',
-  'ice cream': 'ഐസ്ക്രീം'
+  'ice cream': 'ഐസ്ക്രീം',
+  // Kerala Dishes
+  'kunji': 'കുഞ്ഞി പത്തായി',
+  'kunji pathai': 'കുഞ്ഞി പത്തായി',
+  'kunji pathal': 'കുഞ്ഞി പത്തായി',
+  'appam': 'അപ്പം',
+  'puttu': 'പുട്ട്',
+  'dosa': 'ദോസ',
+  'idli': 'ഇഡ്ലി',
+  'uttapam': 'ഉറ്റപ്പം',
+  'paratha': 'പരോട്ട',
+  'nan': 'നാൻ',
+  'biryani': 'ബിരിയാണി',
+  'pulao': 'പുലാവ്',
+  'ghee roast': 'നെയ്യ് റോസ്റ്റ്',
+  'chutney': 'ചട്നി',
+  'pickle': 'അച്ചാർ',
+  'pappadam': 'പപ്പടം',
+  'fry': 'വറുത്തത്',
+  'roast': 'റോസ്റ്റ്',
+  'baked': 'ബേക്ക്ഡ്',
+  'steamed': 'കാര്യപ്പേട',
+  'boiled': 'വേവിച്ചത്',
+  'grilled': 'ഗ്രിൽ',
+  'sautéed': 'വറുത്ത',
+  'broth': 'താപ്പ',
+  'gravy': 'ഗ്രേവി',
+  'sauce': 'സോസ്',
+  'avial': 'അവിയൽ',
+  'thoran': 'തോരൻ',
+  'poriyal': 'പൊരിയാൾ',
+  'masala': 'മസാല',
+  'tandoori': 'താണ്ഡൂരി',
+  'biryani rice': 'ബിരിയാണി അരി',
+  'fried rice': 'വറുത്ത അരി',
+  'butter chicken': 'ബട്ടർ കോഴി',
+  'tikka': 'ടിക്ക',
+  'kebab': 'കെബാബ്',
+  'shrimp': 'തെങ്ങ',
+  'prawns': 'ഞണ്ട്'
 };
 
 const itemNameInput = document.getElementById('itemNameInput');
@@ -97,16 +134,17 @@ itemNameInput.addEventListener('input', function() {
     return;
   }
 
-  // Find matching translations
-  const matches = Object.entries(translations).filter(([eng, mal]) => 
-    eng.toLowerCase().includes(input)
-  );
+  // Find matching translations - only match from the beginning (first word)
+  const matches = Object.entries(translations).filter(([eng, mal]) => {
+    const engLower = eng.toLowerCase();
+    return engLower.startsWith(input);
+  });
 
   if (matches.length > 0) {
     suggestionsList.innerHTML = matches.map(([eng, mal]) => `
       <button type="button" class="list-group-item list-group-item-action" 
               onclick="selectTranslation('${mal}', event)"
-              style="text-align: left; padding: 10px;">
+              style="text-align: left; padding: 10px; cursor: pointer;">
         <div><strong>${mal}</strong></div>
         <small class="text-muted">${eng.charAt(0).toUpperCase() + eng.slice(1)}</small>
       </button>

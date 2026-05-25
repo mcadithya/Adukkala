@@ -72,7 +72,21 @@
           </button>
         </div>
       </div>
+<div class="mt-3 mb-3" id="payment-method-section">
+  <label class="form-label small mb-1">
+    Payment Method:
+  </label>
 
+  <select id="payment_method" class="form-control">
+    <option value="Google Pay" selected>
+      Google Pay
+    </option>
+
+    <option value="Cash">
+      Cash
+    </option>
+  </select>
+</div>
       <button type="button" class="btn btn-primary w-100" onclick="saveBill()">
         Save Bill
       </button>
@@ -189,23 +203,38 @@
         alert("Error creating customer");
       });
   }
+function setPaymentStatus(paid) {
 
-  function setPaymentStatus(paid) {
-    isPaid = paid;
-    var btnPaid = document.getElementById("btn-paid");
-    var btnUnpaid = document.getElementById("btn-unpaid");
-    var customerSelection = document.getElementById("customer-selection");
+  isPaid = paid;
 
-    if (paid) {
-      btnPaid.className = "btn btn-success";
-      btnUnpaid.className = "btn btn-outline-danger";
-      customerSelection.style.display = "none";
-    } else {
-      btnPaid.className = "btn btn-outline-success";
-      btnUnpaid.className = "btn btn-danger";
-      customerSelection.style.display = "block";
-    }
+  var btnPaid = document.getElementById("btn-paid");
+  var btnUnpaid = document.getElementById("btn-unpaid");
+
+  var customerSelection =
+    document.getElementById("customer-selection");
+
+  var paymentMethodSection =
+    document.getElementById("payment-method-section");
+
+  if (paid) {
+
+    btnPaid.className = "btn btn-success";
+    btnUnpaid.className = "btn btn-outline-danger";
+
+    customerSelection.style.display = "none";
+
+    paymentMethodSection.style.display = "block";
+
+  } else {
+
+    btnPaid.className = "btn btn-outline-success";
+    btnUnpaid.className = "btn btn-danger";
+
+    customerSelection.style.display = "block";
+
+    paymentMethodSection.style.display = "none";
   }
+}
 
   function addToCart(id, price, name) {
     // Ensure ID is a string for consistent keys
@@ -308,6 +337,7 @@
     var balance = total - given; // Changed from given - total to total - given
     balanceEl.innerText = balance;
   }
+ 
 
   function saveBill() {
     var itemKeys = Object.keys(cart);
@@ -324,7 +354,7 @@
         return;
       }
     }
-
+    var paymentMethod = document.getElementById("payment_method").value;
     var csrfInput = document.querySelector("[name=csrfmiddlewaretoken]");
     var csrfToken = csrfInput ? csrfInput.value : "";
 
@@ -354,7 +384,8 @@
       total: total,
       given: given,
       balance: balance,
-      is_paid: isPaid
+      is_paid: isPaid,
+      payment_method: paymentMethod,
     };
 
     fetch("", {
@@ -368,10 +399,28 @@
       .then(function (res) {
         return res.json();
       })
-      .then(function (data) {
-        alert("Bill saved successfully!");
+.then(function (data) {
+
+    const successMsg = document.createElement("div");
+
+    successMsg.innerText = "Bill Saved ✓";
+
+    successMsg.style.position = "fixed";
+    successMsg.style.top = "20px";
+    successMsg.style.right = "20px";
+    successMsg.style.background = "#198754";
+    successMsg.style.color = "white";
+    successMsg.style.padding = "12px 20px";
+    successMsg.style.borderRadius = "8px";
+    successMsg.style.zIndex = "9999";
+    successMsg.style.fontWeight = "bold";
+
+    document.body.appendChild(successMsg);
+
+    setTimeout(() => {
         window.location.reload();
-      })
+    }, 800);
+})
       .catch(function (err) {
         console.error(err);
         alert("Failed to save bill");
