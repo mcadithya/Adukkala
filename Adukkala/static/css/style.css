@@ -461,3 +461,65 @@ body {
         object-fit: cover;
     }
 }
+/* =========================
+   MOBILE POS LAYOUT
+========================= */
+
+@media (max-width: 768px) {
+
+    body {
+        overflow: hidden;
+    }
+
+    /* MAIN CONTENT */
+    .flex-grow-1.p-3.p-md-4.bg-light.min-vh-100 {
+        padding: 10px !important;
+        height: 100vh;
+        overflow: hidden;
+    }
+
+    /* ITEMS SECTION */
+    .items-section {
+        height: 48vh;
+        overflow-y: auto;
+        margin-bottom: 8px !important;
+    }
+
+    /* ITEM GRID */
+    .dashboard-item-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+
+    /* ITEM CARD IMAGE */
+    .item-card-compact .dashboard-item-img {
+        height: 110px !important;
+        object-fit: cover;
+    }
+
+    /* BILL SECTION */
+    .bill-section {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 42vh;
+        background: #fff;
+        z-index: 999;
+        overflow-y: auto;
+        border-top: 2px solid #ddd;
+        padding: 10px;
+    }
+
+    /* HIDE CALCULATOR */
+    .bill-section .col-md-6:last-child {
+        display: none;
+    }
+
+    /* SAVE BUTTON STICKY */
+    .bill-section .btn-primary {
+        position: sticky;
+        bottom: 0;
+    }
+}

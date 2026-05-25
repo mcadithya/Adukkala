@@ -8,35 +8,13 @@
 
 <h4>Dashboard</h4>
 
-<!-- ================= TOP : ITEMS ================= -->
-<div class="border p-2 mb-3 items-section">
-  <h6>Items</h6>
 
-  <div class="dashboard-item-grid">
 
-    {% for item in items %}
-    <div class="card p-0 !important text-center h-100 item-card-compact" style="overflow: hidden; cursor: pointer; position: relative;" onclick="addToCart({{ item.id }}, {{ item.price }}, '{{ item.name|escapejs }}')">
-      {% if item.image %}
-      <img src="{{ item.image.url }}" class="dashboard-item-img">
-      {% else %}
-      <div class="dashboard-item-img placeholder"></div>
-      {% endif %}
-
-      <div class="item-overlay">
-        <strong class="item-card-name">{{ item.name }}</strong>
-        <div class="item-card-price">₹{{ item.price }}</div>
-      </div>
-    </div>
-    {% endfor %}
-
-  </div>
-</div>
-
-<!-- ================= BOTTOM : BILL + CALCULATOR ================= -->
-<div class="row bill-section">
+<!-- ================= TOP : BILL + CALCULATOR ================= -->
+<div class="row">
 
   <!-- BILL SECTION -->
-  <div class="col-md-6">
+  <div class="col-md-6 bill-section">
     <div class="border p-3 h-100">
       <h6>Bill</h6>
 
@@ -106,7 +84,29 @@
   </div>
 
 </div>
+<!-- ================= BOTTOM : ITEMS ================= -->
+<div class="border p-2 mb-3 items-section">
+  <h6>Items</h6>
 
+  <div class="dashboard-item-grid">
+
+    {% for item in items %}
+    <div class="card p-0 !important text-center h-100 item-card-compact" style="overflow: hidden; cursor: pointer; position: relative;" onclick="addToCart({{ item.id }}, {{ item.price }}, '{{ item.name|escapejs }}')">
+      {% if item.image %}
+      <img src="{{ item.image.url }}" class="dashboard-item-img">
+      {% else %}
+      <div class="dashboard-item-img placeholder"></div>
+      {% endif %}
+
+      <div class="item-overlay">
+        <strong class="item-card-name">{{ item.name }}</strong>
+        <div class="item-card-price">₹{{ item.price }}</div>
+      </div>
+    </div>
+    {% endfor %}
+
+  </div>
+</div>
 
 <!-- Customer Creation Modal -->
 <div class="modal fade" id="customerModal" tabindex="-1" aria-labelledby="customerModalLabel" aria-hidden="true">
