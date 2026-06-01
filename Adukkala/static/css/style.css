@@ -592,3 +592,41 @@ body {
         font-size: 11px;
     }
 }
+/* CUSTOMERS PAGE MOBILE */
+@media (max-width: 768px) {
+
+    .table-responsive {
+        overflow-x: auto;
+    }
+
+    .table {
+        font-size: 12px;
+    }
+
+    .table th,
+    .table td {
+        padding: 6px;
+        white-space: nowrap;
+    }
+
+    /* Hide less important columns */
+    .table th:nth-child(2),
+    .table td:nth-child(2) {
+        display: none;
+    }
+
+    .table th:nth-child(4),
+    .table td:nth-child(4) {
+        display: none;
+    }
+
+    .btn-group {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+    }
+
+    .btn-group .btn {
+        width: 100%;
+    }
+}
