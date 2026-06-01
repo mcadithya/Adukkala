@@ -30,6 +30,9 @@ class Order(models.Model):
         blank=True
     )
 
+    item_total = models.IntegerField(default=0)
+    adjustment = models.IntegerField(default=0)
+
     total_amount = models.PositiveIntegerField()
     customer_given = models.PositiveIntegerField()
     balance = models.IntegerField()
@@ -42,9 +45,6 @@ class Order(models.Model):
 
     is_paid = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
-
-
-
 class OrderItem(models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE)
     item = models.ForeignKey(Item, on_delete=models.CASCADE)

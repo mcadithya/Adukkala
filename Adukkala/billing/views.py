@@ -72,14 +72,18 @@ def dashboard(request):
             customer = Customer.objects.get(id=customer_id)
 
         order = Order.objects.create(
-        customer=customer,
-        total_amount=data["total"],
-        customer_given=data["given"],
-        balance=data["balance"],
-        is_paid=is_paid,
-        payment_method=data.get("payment_method", "Google Pay")
-    )
-
+    customer=customer,
+    item_total=sum(
+        int(i["price"]) * int(i["qty"])
+        for i in data["items"]
+    ),
+    adjustment=data.get("adjustment", 0),
+    total_amount=data["total"],
+    customer_given=data["given"],
+    balance=data["balance"],
+    is_paid=is_paid,
+    payment_method=data.get("payment_method", "Google Pay")
+)
         for i in data["items"]:
             OrderItem.objects.create(
                 order=order,

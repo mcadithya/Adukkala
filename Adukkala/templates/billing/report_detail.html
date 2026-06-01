@@ -25,9 +25,24 @@
 </table>
 
 <hr>
+<p><strong>Item Total:</strong> ₹{{ order.item_total }}</p>
+
+<p>
+    <strong>Adjustment:</strong>
+
+    {% if order.adjustment > 0 %}
+        +₹{{ order.adjustment }}
+    {% elif order.adjustment < 0 %}
+        ₹{{ order.adjustment }}
+    {% else %}
+        ₹0
+    {% endif %}
+</p>
 
 <p><strong>Grand Total:</strong> ₹{{ order.total_amount }}</p>
+
 <p><strong>Given:</strong> ₹{{ order.customer_given }}</p>
+
 <p><strong>Balance:</strong> ₹{{ order.balance }}</p>
 
 <a href="{% url 'report' %}" class="btn btn-secondary">
