@@ -419,9 +419,6 @@ body {
 }
 @media (max-width: 768px) {
 
-    body {
-        overflow: hidden;
-    }
 
     /* ITEMS TOP */
 
@@ -517,9 +514,22 @@ body {
         display: none;
     }
 
-    /* SAVE BUTTON STICKY */
-    .bill-section .btn-primary {
-        position: sticky;
-        bottom: 0;
+}
+@media (max-width: 768px) {
+
+    /* Hide payment calculator */
+    .calculator-section {
+        display: none !important;
+    }
+
+    /* Bill section full width */
+    .bill-section {
+        width: 100% !important;
+        margin-top: 0;
+    }
+
+    /* Items below bill */
+    .items-section {
+        margin-top: 10px;
     }
 }
