@@ -533,3 +533,63 @@ body {
         margin-top: 10px;
     }
 }
+/* Items section scroll */
+.items-section {
+    max-height: 500px;
+    overflow-y: auto;
+    padding-right: 5px;
+}
+
+/* Custom scrollbar */
+.items-section::-webkit-scrollbar {
+    width: 6px;
+}
+
+.items-section::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 10px;
+}
+
+.items-section::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+/* REPORT MOBILE ONLY */
+@media (max-width: 768px) {
+
+    .table-responsive {
+        border: 0;
+    }
+
+    .table {
+        font-size: 11px;
+    }
+
+    .table th,
+    .table td {
+        padding: 4px;
+        white-space: normal;
+        word-break: break-word;
+    }
+
+    .badge {
+        font-size: 10px;
+    }
+
+    .btn-sm {
+        padding: 2px 6px;
+        font-size: 10px;
+    }
+
+    /* Report summary cards */
+    .row.mb-4 .col-md-4 {
+        margin-bottom: 8px;
+    }
+
+    .row.mb-4 h4 {
+        font-size: 22px;
+    }
+
+    .row.mb-4 h6 {
+        font-size: 11px;
+    }
+}
