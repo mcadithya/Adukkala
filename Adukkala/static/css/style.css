@@ -610,8 +610,8 @@ body {
     }
 
     /* Hide less important columns */
-    .table th:nth-child(2),
-    .table td:nth-child(2) {
+    .table th:nth-child(1),
+    .table td:nth-child(1) {
         display: none;
     }
 
