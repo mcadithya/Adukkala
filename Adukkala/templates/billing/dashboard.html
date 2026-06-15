@@ -86,10 +86,10 @@
 
   <!-- ITEMS SECTION -->
   <div class="col-md-6 items-section">
-    <div class="border p-3 h-100">
+    <div class="border p-3" style="height: 100%; display: flex; flex-direction: column; min-height: 750px;">
       <h6>Items</h6>
 
-      <div class="dashboard-item-grid" style="max-height: 600px; overflow-y: auto;">
+      <div class="dashboard-item-grid" style="flex-grow: 1; overflow-y: auto; overflow-x: hidden; display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 12px; width: 100%; padding-right: 8px;">
 
         {% for item in items %}
         <div class="card p-0 !important text-center h-100 item-card-compact" style="overflow: hidden; cursor: pointer; position: relative; display: flex; flex-direction: column; max-height: 250px;">
