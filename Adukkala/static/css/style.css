@@ -609,11 +609,6 @@ body {
         white-space: nowrap;
     }
 
-    /* Hide less important columns */
-    .table th:nth-child(1),
-    .table td:nth-child(1) {
-        display: none;
-    }
 
     .table th:nth-child(4),
     .table td:nth-child(4) {

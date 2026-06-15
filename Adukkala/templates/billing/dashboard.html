@@ -10,7 +10,7 @@
 
 
 
-<!-- ================= TOP : BILL + CALCULATOR ================= -->
+<!-- ================= BILL + ITEMS (TWO COLUMNS) ================= -->
 <div class="row">
 
   <!-- BILL SECTION -->
@@ -84,41 +84,32 @@
     </div>
   </div>
 
-  <!-- CALCULATOR SECTION -->
-  <div class="col-md-6 calculator-section">
+  <!-- ITEMS SECTION -->
+  <div class="col-md-6 items-section">
     <div class="border p-3 h-100">
-      <h6>Payment Calculator</h6>
+      <h6>Items</h6>
 
-      <input type="number" id="given" class="form-control mb-2" placeholder="Customer Given Amount"
-        oninput="calcBalance()">
+      <div class="dashboard-item-grid" style="max-height: 600px; overflow-y: auto;">
 
-      <h5>Balance: ₹<span id="balance">0</span></h5>
-    </div>
-  </div>
+        {% for item in items %}
+        <div class="card p-0 !important text-center h-100 item-card-compact" style="overflow: hidden; cursor: pointer; position: relative;" onclick="addToCart({{ item.id }}, {{ item.price }}, '{{ item.name|escapejs }}')">
+          {% if item.image %}
+          <img src="{{ item.image.url }}" class="dashboard-item-img">
+          {% else %}
+          <div class="dashboard-item-img placeholder"></div>
+          {% endif %}
 
-</div>
-<!-- ================= BOTTOM : ITEMS ================= -->
-<div class="border p-2 mb-3 items-section">
-  <h6>Items</h6>
+          <div class="item-overlay">
+            <strong class="item-card-name">{{ item.name }}</strong>
+            <div class="item-card-price">₹{{ item.price }}</div>
+          </div>
+        </div>
+        {% endfor %}
 
-  <div class="dashboard-item-grid">
-
-    {% for item in items %}
-    <div class="card p-0 !important text-center h-100 item-card-compact" style="overflow: hidden; cursor: pointer; position: relative;" onclick="addToCart({{ item.id }}, {{ item.price }}, '{{ item.name|escapejs }}')">
-      {% if item.image %}
-      <img src="{{ item.image.url }}" class="dashboard-item-img">
-      {% else %}
-      <div class="dashboard-item-img placeholder"></div>
-      {% endif %}
-
-      <div class="item-overlay">
-        <strong class="item-card-name">{{ item.name }}</strong>
-        <div class="item-card-price">₹{{ item.price }}</div>
       </div>
     </div>
-    {% endfor %}
-
   </div>
+
 </div>
 
 <!-- Customer Creation Modal -->
