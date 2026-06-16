@@ -94,7 +94,7 @@
         {% for item in items %}
         <div class="card p-0 !important text-center h-100 item-card-compact" style="overflow: hidden; cursor: pointer; position: relative; display: flex; flex-direction: column; max-height: 250px;">
           {% if item.image %}
-          <img src="{{ item.image.url }}" class="dashboard-item-img" style="object-fit: cover; flex-shrink: 0;">
+          <img src="{{ item.image.url }}" class="dashboard-item-img" style="object-fit: contain; object-position: center; flex-shrink: 0;">
           {% else %}
           <div class="dashboard-item-img placeholder" style="flex-shrink: 0;"></div>
           {% endif %}
