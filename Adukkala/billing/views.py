@@ -31,6 +31,9 @@ def user_logout(request):
 def is_admin(user):
     return user.is_superuser
 
+def is_non_admin(user):
+    return not user.is_superuser
+
 @login_required
 def dashboard(request):
     items = Item.objects.all()
@@ -152,6 +155,16 @@ def report(request):
     filter_type = request.GET.get('filter', 'all')
     orders = Order.objects.all()
     
+    # Non-admin users can only see last 5 reports
+    if not request.user.is_superuser:
+        orders = orders.order_by("-id")[:5]
+        return render(request, "billing/report.html", {
+            "orders": orders,
+            "totals": None,
+            "filter_type": filter_type,
+            "is_admin": False
+        })
+    
     now = timezone.now()
     
     if filter_type == 'today':
@@ -188,7 +201,8 @@ def report(request):
     return render(request, "billing/report.html", {
         "orders": orders,
         "totals": totals,
-        "filter_type": filter_type
+        "filter_type": filter_type,
+        "is_admin": True
     })
 @login_required
 def report_detail(request, order_id):
@@ -292,6 +306,7 @@ def customer_create(request):
 
     return JsonResponse({"success": False, "message": "Invalid request method"})
 
+@login_required
 @login_required
 def customers_list(request):
     from django.db.models import Sum

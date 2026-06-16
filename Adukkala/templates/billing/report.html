@@ -3,6 +3,7 @@
 
 <div class="d-flex justify-content-between align-items-center mb-4">
   <h4>Report</h4>
+  {% if is_admin %}
   <div class="btn-group">
     <a href="?filter=today"
       class="btn btn-sm btn-outline-dark {% if filter_type == 'today' %}active{% endif %}">Today</a>
@@ -13,8 +14,10 @@
     <a href="?filter=all"
       class="btn btn-sm btn-outline-dark {% if filter_type == 'all' or not filter_type %}active{% endif %}">All</a>
   </div>
+  {% endif %}
 </div>
 
+{% if is_admin and totals %}
 <div class="row mb-4 report-summary">
   <div class="col-md-4 text-center">
     <div class="card p-3 bg-white border h-100">
@@ -35,6 +38,7 @@
     </div>
   </div>
 </div>
+{% endif %}
 
 <div class="table-responsive">
     <table class="table table-bordered">
