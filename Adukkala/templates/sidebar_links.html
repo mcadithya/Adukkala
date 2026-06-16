@@ -21,7 +21,7 @@
 
     {% if user.is_superuser %}
     <li class="nav-item border-top border-secondary mt-2 pt-2">
-        <a class="nav-link text-white-50 small mb-1 disabled py-0">Admin Tools</a>
+        {% comment %} <a class="nav-link text-white-50 small mb-1 disabled py-0">Admin Tools</a> {% endcomment %}
         <a class="nav-link text-white" href="{% url 'items' %}">
             Items
         </a>
