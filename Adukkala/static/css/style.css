@@ -275,6 +275,9 @@ body {
 
 .item-card-compact {
   width: 100%;
+  cursor: pointer;
+  pointer-events: auto;
+  user-select: none;
 }
 
 .item-card-name {
@@ -487,7 +490,9 @@ body {
     .items-section {
         height: 48vh;
         overflow-y: auto;
-        margin-bottom: 8px !important;
+        margin-bottom: 8px !important;        position: relative;
+        z-index: 1;        position: relative;
+        z-index: 1;
     }
 
     /* ITEM GRID */
@@ -512,7 +517,7 @@ body {
         width: 100%;
         height: 42vh;
         background: #fff;
-        z-index: 999;
+        z-index: 998;
         overflow-y: auto;
         border-top: 2px solid #ddd;
         padding: 10px;
@@ -540,6 +545,13 @@ body {
     /* Items below bill */
     .items-section {
         margin-top: 10px;
+        padding-bottom: 42vh;
+    }
+
+    /* Dashboard row layout */
+    .row {
+        display: flex;
+        flex-direction: column;
     }
 }
 /* Items section scroll */
