@@ -90,13 +90,13 @@ body {
 
 .item-card-compact .dashboard-item-img {
   width: 100% !important;
-  height: 220px !important;
+  height: 160px !important;
   object-fit: contain !important;
   object-position: center !important;
   border-radius: 12px;
   display: block;
   background-color: #f0f0f0;
-  padding: 6px;
+  padding: 4px;
   box-sizing: border-box;
 }
 
