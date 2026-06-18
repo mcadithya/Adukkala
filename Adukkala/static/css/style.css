@@ -90,7 +90,7 @@ body {
 
 .item-card-compact .dashboard-item-img {
   width: 100% !important;
-  height: 160px !important;
+  height: 260px !important;
   object-fit: contain !important;
   object-position: center !important;
   border-radius: 12px;
