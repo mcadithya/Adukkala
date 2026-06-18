@@ -86,13 +86,13 @@
 
   <!-- ITEMS SECTION -->
   <div class="col-md-6 items-section">
-    <div class="border p-3" style="height: 100%; display: flex; flex-direction: column; min-height: 750px;">
+    <div class="border p-3" style="height: 100%; display: flex; flex-direction: column;">
       <h6>Items</h6>
 
       <div class="dashboard-item-grid" style="flex-grow: 1; overflow-y: auto; overflow-x: hidden; display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 12px; width: 100%; padding-right: 8px;">
 
         {% for item in items %}
-        <div class="card p-0 !important text-center h-100 item-card-compact" style="overflow: hidden; cursor: pointer; position: relative; display: flex; flex-direction: column; max-height: 250px;" onclick="addToCart({{ item.id }}, {{ item.price }}, '{{ item.name|escapejs }}')">
+        <div class="card p-0 !important text-center h-100 item-card-compact" style="overflow: hidden; cursor: pointer; position: relative; display: flex; flex-direction: column; max-height: 450px;" onclick="addToCart({{ item.id }}, {{ item.price }}, '{{ item.name|escapejs }}')">
           {% if item.image %}
           <img src="{{ item.image.url }}" class="dashboard-item-img" style="object-fit: contain; object-position: center; flex-shrink: 0;">
           {% else %}
